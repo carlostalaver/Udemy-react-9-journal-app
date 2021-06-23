@@ -1,0 +1,10 @@
+//Mis colores
+// Ojo este archivo es lo que se conoce como PARTIAL en sass, la nomenclatura es _nombrepartial.scss
+// para importar este partial en otro archivo .scss @import './base/_nombrepartial' sin el _ porque ya sass sabe que me estoy refiriendo a un partial
+$primary: #5c62c5;
+$dark-grey:  #363636;
+$light-grey: #d8d8d8;
+
+$white: #fff;
+$google-blue: #4285f4;
+$button-active-blue: #1669f2;
