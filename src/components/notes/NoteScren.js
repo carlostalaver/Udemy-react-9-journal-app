@@ -9,7 +9,7 @@ export const NoteScren = () => {
 
             <div className="notes__content">
 
-                <input  type="text" placeholder="Some awesome title"  className="notes__title-input" autocomplete="off"/>
+                <input  type="text" placeholder="Some awesome title"  className="notes__title-input" autoComplete="off"/>
 
                 <textarea placeholder="What happen today" className="notes__textarea">
 
