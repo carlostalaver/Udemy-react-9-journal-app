@@ -10,7 +10,7 @@ import { types } from "../types/types"
     }
 */
 
-
+/* Recordar que los reducer  recibe el state y action */
 export const authReducer = (state = {}, action) => {
 
     switch (action.type) {
