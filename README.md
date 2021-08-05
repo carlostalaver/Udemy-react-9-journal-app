@@ -8,3 +8,9 @@
 
 ## Para instalar validatorJS
 ### `npm install validator` https://www.npmjs.com/package/validator
+
+## Para instalar momentJS para trabajar con fechas de manera facil
+### `npm install moment --save` https://momentjs.com/
+
+
+

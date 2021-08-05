@@ -3,6 +3,7 @@ import { types } from '../types/types'
 import { finishLoading, startLoading } from './ui';
 
 import Swal from 'sweetalert2'
+import { noteLogout } from './notes';
 
 //ACCIONES ASINCRONAS
 export const startLoginEmailPaswords = (email, password) => {
@@ -59,6 +60,8 @@ export const startLogout = () => {
        await firebase.auth().signOut();
 
        dispatch( logout() );
+
+       dispatch( noteLogout() );
     }
 }
 

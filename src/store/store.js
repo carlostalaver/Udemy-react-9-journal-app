@@ -2,13 +2,15 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
 import { authReducer } from "../reducers/authReducer";
+import { notesReducer } from "../reducers/notesReducer";
 import { uiReducer } from "../reducers/uiReducer";
 
 
 /* Esto se hace para combinar una lista de reducer y así poder pasarselo a la funcion createStore */
 const reducersList = combineReducers({
     auth: authReducer,
-    ui: uiReducer
+    ui: uiReducer,
+    notes: notesReducer
 });
 
 /* Para configurar el middleware para poder realizar peticiones asyncronas*/

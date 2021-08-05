@@ -1,30 +1,45 @@
-import React from 'react'
+import React from 'react';
+import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { activeNote } from '../../actions/notes';
 
-export const JournalEntry = () => {
+export const JournalEntry = ({id, date, title, body, url}) => {
+
+    const noteDate = moment(date);
+
+    const dispatch = useDispatch();
+
+    const handleEntryClick = () => {
+        dispatch( activeNote(id, { date, title, body, url }));
+    };
+
     return (
-        <div className="journal__entry pointer">
-            <div
-                className="journal__entry-picture"
-                style= {{
-                    backgroundSize: 'cover',
-                    backgroundImage: 'url(https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.meteorologiaenred.com%2Fwp-content%2Fuploads%2F2017%2F01%2Fcielo-830x466.jpg&imgrefurl=https%3A%2F%2Fwww.meteorologiaenred.com%2Fcielo-estrellado.html&tbnid=GAGtGE0PRta_wM&vet=12ahUKEwiF46CV74jxAhXRipUCHdolAEoQMygCegUIARDQAQ..i&docid=Sn4_GjhKWPIU3M&w=830&h=466&q=imagenes%20cielo%20nocturno&hl=es&ved=2ahUKEwiF46CV74jxAhXRipUCHdolAEoQMygCegUIARDQAQ)'
-                }}
-            >
-
-            </div>
+        <div className="journal__entry pointer animate__animated animate__fadeIn animate__faster"
+            onClick = { handleEntryClick }>
+            {
+                url &&
+                <div
+                    className="journal__entry-picture"
+                    style={{
+                        backgroundSize: 'cover',
+                        backgroundImage: `url(${ url })`
+                    }}
+                >
+                </div>
+            }
 
             <div className="journal__entry-body">
                 <p className="journal__entry-title">
-                    Un nuevo dia
+                   { title }
                 </p>
                 <p className="journal__entry-content">
-                   este es el contenidao de un parrafo 
+                   { body }
                 </p>
             </div>
 
             <div className="journal__entry-date-box">
-                <span>Monday</span>
-                <h4>21</h4>
+                <span>{ noteDate.format('dddd') }</span>
+                <h4>{ noteDate.format('Do') }</h4>
             </div>
         </div>
     )
