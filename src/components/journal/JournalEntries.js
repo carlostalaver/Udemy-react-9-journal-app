@@ -11,7 +11,7 @@ export const JournalEntries = () => {
             {
                  notes.map(note => (
                     <JournalEntry 
-                        key={note.id}
+                        key = { note.id }
                         {...note}
                      />
                 ))

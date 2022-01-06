@@ -3,8 +3,8 @@
 /* Se encarga de la logica para subir imagenes a cloudinary */
 
 export const fileUpload = async ( file ) => {
-    const cloudUrl = 'https://api.cloudinary.com/v1_1/dxmq8s27l/upload'; // es la url de cloudinary
-    const formData = new FormData();
+    const cloudUrl = 'https://api.cloudinary.com/v1_1/dxmq8s27l/upload'; // es la url de cloudinary --> https://cloudinary.com/console/c-0105305893e3cd8df7c3ce3fe8df4d
+    const formData = new FormData(); //Los objetos FormData le permiten compilar un conjunto de pares clave/valor para enviar mediante XMLHttpRequest. son propios de javascript
     formData.append('upload_preset', 'react-journal');
     formData.append('file', file);
 

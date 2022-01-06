@@ -8,13 +8,14 @@ export const NoteScren = () => {
 
     const { active: note } = useSelector(state => state.notes);
     const [formValues, handleInputChange, reset] = useForm(note);
-    const { body, title, idNote } = formValues;
+    const { body, title, id } = formValues;
     const dispatch = useDispatch();
 
     /* useRef permite almacenar una variable mutable en .current y que ESTE CAMBIO NO VA A RENDERIZAR EL 
        COMPONENTE CUANTO DICHO VALOR HAYA CAMBIADO */
     const activeId = useRef(note.id); // almaceno el valor del id de una nota
 
+    /* Uso este efecto porque necesito resetear el formulario cada vez que el state notes -> active cambie */
     useEffect(()=> {
         /* si el id de la nota cambió debo resetear el stado del form */
         if(note.id !== activeId.current) {
@@ -23,12 +24,14 @@ export const NoteScren = () => {
         }
     }, [reset, note]);
 
+    /* Cada que actualizo un campo de entrada del formulario se dispara este efecto y por consiguiente despacho una nueva accion */
     useEffect(() => {
+        // console.log("Disparando efecto...");
         dispatch( activeNote(formValues.id, {...formValues}) );
     }, [formValues, dispatch])
 
     const handleDelete = () => {
-        dispatch( startDeleting(idNote) );
+        dispatch( startDeleting(id) );
     };
 
 

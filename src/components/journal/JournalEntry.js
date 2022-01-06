@@ -5,7 +5,7 @@ import { activeNote } from '../../actions/notes';
 
 export const JournalEntry = ({id, date, title, body, url}) => {
 
-    const noteDate = moment(date);
+    const noteDate = moment(date);// esto es si usara new Date() de javascript
 
     const dispatch = useDispatch();
 
@@ -21,7 +21,7 @@ export const JournalEntry = ({id, date, title, body, url}) => {
                 <div
                     className="journal__entry-picture"
                     style={{
-                        backgroundSize: 'cover',
+                        backgroundSize: 'cover', // notar que es backgroundSize y no background-size
                         backgroundImage: `url(${ url })`
                     }}
                 >

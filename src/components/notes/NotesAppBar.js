@@ -16,7 +16,7 @@ export const NotesAppBar = () => {
     };
 
     const handleFileChange = (e) => {
-        const file = e.target.files[0];
+        const file = e.target.files[0]; // verifico si hay un archivo cargado
         if( file ) {
             dispatch( startUploading( file ) );
         }
@@ -26,6 +26,7 @@ export const NotesAppBar = () => {
         <div className="notes__appbar">
             <span> 08 de junio 2021</span>
 
+            {/* Lo oculto para que no se vea en la interfaz */}
             <input
                 id= "fileSelector"
                 type="file"

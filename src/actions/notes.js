@@ -4,9 +4,14 @@ import { types } from '../types/types';
 import Swal from 'sweetalert2';
 import { fileUpload } from '../helpers/fileUpload';
 
+/* diferencias entre usar useSelector() y getState:  es un custom hook que te brinda la librería react-redux para poder obtener data del store de forma más práctica.
+  En cambio getState() es una función que viene de manera implícita cuando realizas llamados al middleware Thunk, es decir cuando despachas funciones en lugar de despachar un objeto de acción.
+  Por consiguiente, cada vez que quieras obtener el state más actual al momento de despachar funciones, Thunk ya te da la función getState() para obtener dicha data.
+  Entonces al momento de querer obtener el state más actual en componentes utilizarás el custom hook useSelector() ya que la función getState() solo se encuentra disponible al despachar acciones mediante el Thunk. */
 
-export const startNewNote = () => {
-    return async ( dispatch, getState ) => {
+  /* por lo general las acciones que son asincronas inician con startALGO */
+  export const startNewNote = () => {
+    return async ( dispatch, getState ) => { //retorno un callback porq esto es un action asincrono
         const uid = getState().auth.uid; //getState() lo uso dentro del action para tener acceso al estado de la aplicacion
 
         const newNote = {
@@ -16,10 +21,10 @@ export const startNewNote = () => {
         }
 
         /* Para guardar una nueva nota en firebase */
-        //uid: será el nombre de la conleccion
+        //uid: será el nombre de la coleccion
         //journal: sera el numbre del Documento.
         //notes: sera la informacion contenida en cada documento
-        const docRef =  await bd.collection(`${uid}/journal/notes`).add(newNote);
+        const docRef =  await bd.collection(`${uid}/journal/notes`).add(newNote); //espero que se haga la insercion, ${uid}/journal/notes es el path donde insertare la info en firebase
         
         dispatch( activeNote(docRef.id, newNote));
         dispatch( addNewNote(docRef.id, newNote) );
@@ -53,7 +58,7 @@ export const startSaveNote = ( note ) => {
     return async (dispatch, getState) =>{
 
         const { uid } = getState().auth;
-        (!note.url) && delete note.url
+        (!note.url) && delete note.url // elimino la proiedad url se es que está undefined ya que si lo envio undefined firebase lanzará un error
         const noteToFirestore = {...note };
         delete noteToFirestore.id;
 

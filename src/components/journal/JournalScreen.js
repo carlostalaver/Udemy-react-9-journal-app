@@ -6,7 +6,7 @@ import { Sidebar } from './Sidebar'
 
 export const JournalScreen = () => {
 
-    const { active } = useSelector(state => state.notes);
+    const { active } = useSelector(state => state.notes);// de todos los state de la app retornará el state notes
 
     return (
         <div className="journal__main-container animate__animated animate__fadeIn animate__faster">
