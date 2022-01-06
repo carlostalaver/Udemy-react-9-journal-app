@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm';
-import validator from 'validator'
+import validator from 'validator';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeError, setError } from '../../actions/ui';
 import { startRegisterWhitEMailPasswordName } from '../../actions/auth';
@@ -11,9 +11,10 @@ export const RegisterScreen = () => {
     const dispatchRegister = useDispatch();
 
     // para acceder a la informacion que tiene reducer ui
-    const { msgError } = useSelector(state => state.ui); // retorno el state ui, si solo dejo la palabra state despues de la => me retornara todo los reducer que que registrado en el store
+    // retorno el state ui, si solo dejo la palabra state despues de la => me retornara todo los reducer que que registrado en el store
+    const { msgError } = useSelector(state => state.ui);
 
-    const [formValues, handleInputChange] = useForm({
+    const [formValues ,   handleInputChange ] = useForm({
         name: 'Carlitos',
         email: 'carlito@gmail.com',
         password: '123456',
@@ -22,9 +23,6 @@ export const RegisterScreen = () => {
 
 
     const { name, email, password, password2 } = formValues;
-
-
-
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -36,13 +34,13 @@ export const RegisterScreen = () => {
 
     const isFormValid = () => {
 
-        if (name.trim().length === 0) {
+        if (validator.isEmpty(name)) {
             dispatchRegister(setError('Name is required'));
             return false;
         } else if (!validator.isEmail(email)) {
-            dispatchRegister(setError('Email is not validad'));
+            dispatchRegister(setError('Email is not valided'));
             return false;
-        } else if (password !== password2 || password.length < 5) {
+        } else if((!validator.equals(password, password2)) || (validator.isStrongPassword(password, {minLength:5}))) {
             dispatchRegister(setError('Password should be at least  6 characters and match each other'));
             return false;
         }
@@ -55,7 +53,7 @@ export const RegisterScreen = () => {
         <>
             <h3 className="auth__login">Register</h3>
             <form 
-                onSubmit={handleRegister}
+                onSubmit = { handleRegister }
                 className = "animate__animated animate__fadeIn animate__faster"
             >
 
@@ -73,7 +71,7 @@ export const RegisterScreen = () => {
                     className="auth__input"
                     autoComplete="off"
                     value={name}
-                    onChange={handleInputChange}
+                    onChange = { handleInputChange }
                 />
                 <input type="text"
                     placeholder="Email"
@@ -81,21 +79,21 @@ export const RegisterScreen = () => {
                     className="auth__input"
                     autoComplete="off"
                     value={email}
-                    onChange={handleInputChange}
+                    onChange = { handleInputChange }
                 />
                 <input type="password"
                     placeholder="Password"
                     name="password"
                     className="auth__input"
                     value={password}
-                    onChange={handleInputChange}
+                    onChange = { handleInputChange }
                 />
                 <input type="password"
                     placeholder="Confirm password"
                     name="password2"
                     className="auth__input"
-                    value={password2}
-                    onChange={handleInputChange}
+                    value = { password2 }
+                    onChange = { handleInputChange }
                 />
 
 

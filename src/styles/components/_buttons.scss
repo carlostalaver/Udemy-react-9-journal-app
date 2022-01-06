@@ -23,11 +23,11 @@
     border-radius: 2px;
     
     &:disabled {
-        background-color: darken($color: $primary, $amount: 15);
+        background-color: lighten($color: $primary, $amount: 15); //lighten funcion propia de sass, esta funcion aclara
     }
 
     &:hover {
-         background-color: darken($color: $primary, $amount: 15);
+         background-color: darken($color: $primary, $amount: 15);//darken funcion propia de sass, esta funcion oscurece
     }
 }
 
@@ -37,7 +37,7 @@
 
 .btn-danger {
   background-color: red;
-  transition: background-color .3s ease; // para q el estilo de abajo se aplique lentamente
+  transition: background-color .3s ease; // para q el estilo   background-color de abajo se aplique lentamente
   &:hover { 
       background-color: darken($color: red, $amount: 10);
   }

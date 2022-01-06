@@ -9,7 +9,7 @@ export const LoginScreen = () => {
     /* Este hook me permite hacer dispatch de acciones */
     const dispatchLogin = useDispatch();
 
-    const  {loading}  = useSelector(state => state.ui);
+    const  { loading }  = useSelector(state => state.ui); // de todos los state que tengo disponible solo necesito el ui el cual desestructuro para obtener el loading no mas
 
     const [ formValues, handleInputChange ] =  useForm({
         email: 'carlito@gmail.com',
@@ -36,7 +36,7 @@ export const LoginScreen = () => {
                 className = "animate__animated animate__fadeIn animate__faster"
             >
                 <input type="text"
-                    placeholder="email"
+                    placeholder="Email"
                     name="email"
                     className="auth__input"
                     autoComplete="off"
@@ -53,8 +53,9 @@ export const LoginScreen = () => {
                 <button type="submit"
                         className="btn btn-primary btn-block"
                         disabled={ loading }>
-                    Login { loading }
+                    Login
                 </button>
+
                 <hr />
                 <div className="auth__social-networks">
                     <p>Login whit social networks</p>

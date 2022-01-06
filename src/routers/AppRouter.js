@@ -12,28 +12,28 @@ import { startLoadingNotes } from '../actions/notes';
 export const AppRouter = () => {
     const dispatch = useDispatch();
 
-
+    /*  chekingLogin: usada para verificar si le pregunté a firebase si hay alguien logueado, mientras sea true no voy a mostrar nada mas de la app por no estoy seguro si engo un usuario en session */
     const [chekingLogin, setchekingLogin] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    /* Me permite crear un observable para estar al pendiente de la autenticación del usuario, si esta cambia
+    /*onAuthStateChanged  Me permite crear un observable para estar al pendiente de la autenticación del usuario, si esta cambia
        veré el cambio al toque gracias al observable.
-    */
+       onAuthStateChanged: me permite obtener la informacion del usuario en sesion, de no haber ninguno retorna null.*/
     useEffect(() => {
-        firebase.auth().onAuthStateChanged( async (user) => {
-            if(user?.uid){
+        firebase.auth().onAuthStateChanged(async (user) => {
+            if ( user?.uid ) { // si user no es nulo
                 dispatch( login(user.uid, user.displayName) );
-                setIsLoggedIn(true)
-                dispatch( startLoadingNotes( user.uid ) ); 
-            }else {
+                setIsLoggedIn(true) // me permitirá saber cuando tenga un usuario logueado
+                dispatch( startLoadingNotes(user.uid) );
+            } else {
                 setIsLoggedIn(false)
             }
-            setchekingLogin(false); // me permitirá saber cuando tenga un usuario en logueado
-        } )
-    }, [dispatch, setchekingLogin, setIsLoggedIn]);
+            setchekingLogin(false); // si onAuthStateChanged respondió, ojo que no es para saber si alguien está logueado, es para verificar si fuí a firebase
+        })
+    }, [dispatch, setchekingLogin, setIsLoggedIn]); // las coloco como dependencias para no ver el error por consola, pero en sí, no cambiaran
 
 
-    if(chekingLogin){
+    if( chekingLogin ){ // mientras valido si tengo un usuario en sesion mostrare este componente
 
         return (
             <h1> Wait...  </h1>

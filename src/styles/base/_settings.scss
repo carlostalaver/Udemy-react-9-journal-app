@@ -1,4 +1,5 @@
-//Mis colores
+//Este _settings se usa para establecer las configuraciones globales de la app, notar estoy definiendo "constantes"
+// que estaran disponibles a lo largo de mi app
 // Ojo este archivo es lo que se conoce como PARTIAL en sass, la nomenclatura es _nombrepartial.scss
 // para importar este partial en otro archivo .scss @import './base/_nombrepartial' sin el _ porque ya sass sabe que me estoy refiriendo a un partial
 $primary: #5c62c5;

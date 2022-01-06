@@ -15,12 +15,14 @@ export const startLoginEmailPaswords = (email, password) => {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(({ user }) => {
 
-                dispatch(login(user.uid, user.displayName));
+                dispatch( login(user.uid, user.displayName) );
                 dispatch( finishLoading() );
             })
             .catch((e) => {
                 dispatch( finishLoading() );
                 Swal.fire('Error', e.message, 'error');
+            }).finally(() => {
+                dispatch(finishLoading()); // si uso esto en finally no es necesario usarlo en el .then y el .catch
             })
     }
 }
@@ -40,12 +42,12 @@ export const startGoogleLogin = () => {
 /* Accion para crear un nuevo usuario en firebase */
 export const startRegisterWhitEMailPasswordName = (email, password, name) => {
     return (dispatch) => {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        firebase.auth().createUserWithEmailAndPassword(email, password) // createUserWithEmailAndPassword con esta funcion creo el registro en firebase 
             .then(async ({ user }) => {
-                
-                await user.updateProfile({ displayName: name }); // si no hago esto la prop displayName vendrá vacia ya que no estoy usando una red solcial para crear el usuario
+                // la funcion updateProfile me permite actualizar el displayName del usuario recien creado
+                await user.updateProfile({ displayName: name }); // si no hago esto la prop displayName vendrá en null ya que no estoy usando una red solcial para crear el usuario (para logearme)
 
-                dispatch(login(user.uid, user.displayName));
+                dispatch( login(user.uid, user.displayName) );
             })
             .catch((e) => {
 
